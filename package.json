@@ -1,0 +1,28 @@
+{
+  "name": "npm-audit-widget",
+  "description": "",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Brandon Boone",
+  "homepage": "",
+  "contributors": [
+    "Brandon Boone (https://github.com/BrandonBoone)"
+  ],
+  "scripts": {
+    "clean": "rimraf *.vsix",
+    "build": "tfx extension create --manifest-globs vss-extension.json",
+    "publish": "tfx extension publish --manifest-globs vss-extension.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "rimraf": "^2.6.2"
+  },
+  "keywords": [],
+  "repository": "https://github.com/BrandonBoone/npm-audit-widget",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ]
+}
