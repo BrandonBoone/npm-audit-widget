@@ -14,7 +14,7 @@
         "default": "img/logo.png"
     },
     "scopes": [
-        "vso.work"
+        "vso.build"
     ],
     "contributions": [
         {
@@ -28,7 +28,7 @@
                 "description": "Displays the number and severity of security issues in the build",
                 "catalogIconUrl": "img/logo.png",
                 "previewImageUrl": "img/preview.png",                            
-                "uri": "hello-world.html",
+                "uri": "npm-audit-widget.html",
                 "supportedSizes": [
                      {
                             "rowSpan": 1,
@@ -41,7 +41,7 @@
     ],
     "files": [
         {
-            "path": "hello-world.html", "addressable": true
+            "path": "npm-audit-widget.html", "addressable": true
         },
         {
             "path": "sdk/scripts", "addressable": true
@@ -49,5 +49,22 @@
         {
             "path": "img", "addressable": true
         }
-    ]
+    ],
+    "links": {
+        "repository": {
+            "uri": "https://github.com/BrandonBoone/npm-audit-widget"
+        },
+        "issues": {
+            "uri": "https://github.com/BrandonBoone/npm-audit-widget/issues"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/BrandonBoone/npm-audit-widget"
+    },
+    "content": {
+        "license": {
+          "path": "LICENSE"
+        }
+    }
 }

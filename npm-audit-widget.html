@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>          
+        <script src='sdk/scripts/VSS.SDK.min.js'></script>
+        <script src='sdk/scripts/zip.js'></script>
+        <script src='sdk/scripts/zip-ext.js'></script>
+        <script type='text/javascript'>
+            // adapted from http://gildas-lormeau.github.io/zip.js/demos/demo2.html
+            var href = window.location.href;
+            zip.workerScriptsPath = href.substring(0, href.lastIndexOf('/')) + '/sdk/scripts/'
+            var obj = this;
+            var requestFileSystem = obj.webkitRequestFileSystem || obj.mozRequestFileSystem || obj.requestFileSystem;
+
+            function onerror(message) {
+                alert(message);
+            }
+
+            function createTempFile(callback) {
+                var tmpFilename = "tmp.dat";
+                requestFileSystem(TEMPORARY, 4 * 1024 * 1024 * 1024, function(filesystem) {
+                    function create() {
+                        filesystem.root.getFile(tmpFilename, {
+                            create : true
+                        }, function(zipFile) {
+                            callback(zipFile);
+                        });
+                    }
+
+                    filesystem.root.getFile(tmpFilename, null, function(entry) {
+                        entry.remove(create, create);
+                    }, create);
+                });
+            }
+
+            var model = (function() {
+                var URL = obj.webkitURL || obj.mozURL || obj.URL;
+
+                return {
+                    getEntries : function(buffer, onend) {
+                        zip.createReader(new zip.ArrayBufferReader(buffer), function(zipReader) {
+                            zipReader.getEntries(onend);
+                        }, onerror);
+                    },
+                    getEntryFile : function(entry, onend, onprogress) {
+                        var writer, zipFileEntry;
+
+                        function getData() {
+                            entry.getData(writer, function(text) {
+                                onend(text);
+                            }, onprogress);
+                        }
+
+                        writer = new zip.TextWriter();
+                        getData();
+                    }
+                };
+            })();
+
+            // (function() {
+            //     var fileInput = document.getElementById("file-input");
+            //     var unzipProgress = document.createElement("progress");
+            //     var fileList = document.getElementById("file-list");
+            //     var creationMethodInput = document.getElementById("creation-method-input");
+
+            //     function download(entry, li, a) {
+            //         model.getEntryFile(entry, creationMethodInput.value, function(blobURL) {
+            //             var clickEvent = document.createEvent("MouseEvent");
+            //             if (unzipProgress.parentNode)
+            //                 unzipProgress.parentNode.removeChild(unzipProgress);
+            //             unzipProgress.value = 0;
+            //             unzipProgress.max = 0;
+            //             clickEvent.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            //             a.href = blobURL;
+            //             a.download = entry.filename;
+            //             a.dispatchEvent(clickEvent);
+            //         }, function(current, total) {
+            //             unzipProgress.value = current;
+            //             unzipProgress.max = total;
+            //             li.appendChild(unzipProgress);
+            //         });
+            //     }
+
+            //     if (typeof requestFileSystem == "undefined")
+            //         creationMethodInput.options.length = 1;
+            //     fileInput.addEventListener('change', function() {
+            //         fileInput.disabled = true;
+            //         model.getEntries(fileInput.files[0], function(entries) {
+            //             fileList.innerHTML = "";
+            //             entries.forEach(function(entry) {
+            //                 var li = document.createElement("li");
+            //                 var a = document.createElement("a");
+            //                 a.textContent = entry.filename;
+            //                 a.href = "#";
+            //                 a.addEventListener("click", function(event) {
+            //                     if (!a.download) {
+            //                         download(entry, li, a);
+            //                         event.preventDefault();
+            //                         return false;
+            //                     }
+            //                 }, false);
+            //                 li.appendChild(a);
+            //                 fileList.appendChild(li);
+            //             });
+            //         });
+            //     }, false);
+            // })();
+
+
+
+
+
+            VSS.init({                        
+                explicitNotifyLoaded: true,
+                usePlatformStyles: true
+            });
+    
+            VSS.require(['TFS/Dashboards/WidgetHelpers', 'TFS/Build/RestClient'], function (WidgetHelpers, BuildRestClient) {
+                debugger;
+                console.log(WidgetHelpers, BuildRestClient);
+                WidgetHelpers.IncludeWidgetStyles();
+                VSS.register('npmAuditWidget', function () {
+                    var projectId = VSS.getWebContext().project.id;                
+                    return {
+                        load: function (widgetSettings) {
+                            
+                            var client = BuildRestClient.getClient();
+                            client.getArtifactContentZip(5655,'audit_results', projectId)
+                            .then(function (artifact) {
+                                model.getEntries(artifact, function(entries) {
+                                    entries.forEach(function(entry) {
+                                        model.getEntryFile(entry, function(blobURL) {
+                                            console.log(blobURL);
+                                        });
+                                    });
+                                });
+                            });
+    
+                            return WidgetHelpers.WidgetStatusHelper.Success();
+                        }
+                    }
+                });
+                VSS.notifyLoadSucceeded();
+            });
+
+
+
+
+
+
+
+        </script>              
+    </head>
+    <body>
+        <div class='widget'>
+            <h2 class='title'></h2>
+        </div>
+    </body>
+</html>

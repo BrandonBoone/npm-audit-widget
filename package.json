@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "clean": "rimraf *.vsix",
-    "build": "tfx extension create --manifest-globs vss-extension.json",
+    "build": "npm run clean && tfx extension create --manifest-globs vss-extension.json",
     "publish": "tfx extension publish --manifest-globs vss-extension.json"
   },
   "dependencies": {},
