@@ -22,3 +22,7 @@ npm audit widget is a Dashboard widget for Azure DevOps (TFS) Dashboard's that d
   - Path to Publish: `$/[path to application root (folder with package.json)]/audit.json`
   - Artifact Name: `audit_results`
   - Artifact Type: `Server`
+  
+## Credits
+
+- Logo: [virus by Ilsur Aptukov from the Noun Project](https://thenounproject.com/term/virus/209072/)
