@@ -21,7 +21,8 @@
             "id": "npmAuditWidget",
             "type": "ms.vss-dashboards-web.widget",
             "targets": [
-                "ms.vss-dashboards-web.widget-catalog"
+                "ms.vss-dashboards-web.widget-catalog",
+                ".npmAuditWidget.Configuration"
             ],
             "properties": {
                 "name": "npm Audit Widget",
@@ -32,10 +33,20 @@
                 "supportedSizes": [
                      {
                             "rowSpan": 1,
-                            "columnSpan": 2
+                            "columnSpan": 1
                         }
                     ],
                 "supportedScopes": ["project_team"]
+            }
+        },
+        {
+            "id": "npmAuditWidget.Configuration",
+            "type": "ms.vss-dashboards-web.widget-configuration",
+            "targets": [ "ms.vss-dashboards-web.widget-configuration" ],
+            "properties": {
+                "name": "npm Audit Widget Configuration",
+                "description": "Configures Audit Widget",
+                "uri": "configuration.html"
             }
         }
     ],
@@ -44,7 +55,16 @@
             "path": "npm-audit-widget.html", "addressable": true
         },
         {
-            "path": "sdk/scripts", "addressable": true
+            "path": "configuration.html", "addressable": true
+        },
+        {
+            "path": "node_modules/vss-web-extension-sdk/lib", "addressable": true
+        },
+        {
+            "path": "node_modules/jszip/dist", "addressable": true
+        },
+        {
+            "path": "dist", "addressable": true
         },
         {
             "path": "img", "addressable": true
@@ -63,8 +83,11 @@
         "uri": "https://github.com/BrandonBoone/npm-audit-widget"
     },
     "content": {
+        "details": {
+            "path": "overview.md"
+        },
         "license": {
-          "path": "LICENSE"
+            "path": "LICENSE"
         }
     }
 }

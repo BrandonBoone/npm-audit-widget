@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src='node_modules/vss-web-extension-sdk/lib/VSS.SDK.min.js'></script>
+    <script src='dist/app.js'></script>
+</head>
+<body>
+
+  <div class="widget-configuration">
+    <div id="build-picker" class="dropdown">
+      <label>Build</label>
+      <div class="wrapper">
+        <select id="build-dropdown">
+          <option value="" selected disabled hidden>Please select a build</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    App.configuration(VSS);
+  </script>
+</body>
+</html>

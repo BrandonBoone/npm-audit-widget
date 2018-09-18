@@ -10,4 +10,6 @@ Widget for Azure DevOps (TFS) Dashboard's for displaying npm audit results
 
 ## Credits
 
-Logo: virus by Ilsur Aptukov from the Noun Project
+- Logo: virus by Ilsur Aptukov from the Noun Project
+- Configuration Section: https://github.com/SWarnberg/BuildWarningsWidget/
+- Build Tooling: https://github.com/reduxjs/redux

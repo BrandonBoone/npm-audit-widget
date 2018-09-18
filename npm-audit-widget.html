@@ -1,69 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>          
-        <script src='sdk/scripts/VSS.SDK.min.js'></script>
-        <script src='sdk/scripts/jszip.js'></script>
+        <script src='node_modules/vss-web-extension-sdk/lib/VSS.SDK.min.js'></script>
+        <script src='node_modules/jszip/dist/jszip.min.js'></script>
+        <script src='dist/app.js'></script>
         <script type='text/javascript'>
-            VSS.init({                        
-                explicitNotifyLoaded: true,
-                usePlatformStyles: true
-            });
-    
-            VSS.require(['TFS/Dashboards/WidgetHelpers', 'TFS/Build/RestClient'], function (WidgetHelpers, BuildRestClient) {
-                debugger;
-                console.log(WidgetHelpers, BuildRestClient);
-                WidgetHelpers.IncludeWidgetStyles();
-                VSS.register('npmAuditWidget', function () {
-                    var projectId = VSS.getWebContext().project.id;                
-                    return {
-                        load: function (widgetSettings) {
-                            
-                            var client = BuildRestClient.getClient();
-                            client.getArtifactContentZip(5655,'audit_results', projectId)
-                            .then(function (zipArrayBuffer) {
-                                JSZip.loadAsync(zipArrayBuffer).then(function (zip) {
-                                    console.log(zip);
-                                    zip.file('audit_results/audit.json').async('string')
-                                    .then((function (auditJson) {
-                                        var auditData = JSON.parse(auditJson);
-                                        var severities = Object.keys(auditData.advisories)
-                                            .reduce(function(prev, key) {
-                                                var advisory = auditData.advisories[key];
-                                                
-                                                prev[advisory.severity] = (prev[advisory.severity] || 0) + 1;
-
-                                                return prev;
-                                            }, {});
-                                        var widgetArea = $('.widget');
-                                        Object.keys(severities)
-                                            .map(function(severity) {
-                                                widgetArea.append(
-                                                    $('div').text(severity + ':' + severities[severity])
-                                                );
-                                            });
-                                        
-                                    }));
-                                });
-                            });
-    
-                            return WidgetHelpers.WidgetStatusHelper.Success();
-                        }
-                    }
-                });
-                VSS.notifyLoadSucceeded();
-            });
-
-
-
-
-
-
-
+            new App.auditWidget(VSS, JSZip);
         </script>              
     </head>
     <body>
         <div class='widget'>
-            <h2 class='title'></h2>
+            <h2 class="title" id='title'>npm Security Risks</h2>
+            <div class="big-count truncated-text-ellipsis" id='count'></div>
+            <div class="footer runcated-text-ellipsis" id='footer'></div>
         </div>
     </body>
 </html>
