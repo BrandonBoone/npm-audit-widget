@@ -1,6 +1,6 @@
 # ![logo](img/logo.png) npm-audit-widget
 
-[![Build Status](https://api.travis-ci.org/BrandonBoone/npm-audit-widget.svg?branch=master)](https://travis-ci.org/BrandonBoone/npm-audit-widget)
+[![Build Status](https://api.travis-ci.org/BrandonBoone/npm-audit-widget.svg?branch=master)](https://travis-ci.org/BrandonBoone/npm-audit-widget) [![Greenkeeper badge](https://badges.greenkeeper.io/BrandonBoone/npm-audit-widget.svg)](https://greenkeeper.io/)
 
 Widget for Azure DevOps (TFS) Dashboard's for displaying npm audit results
 
