@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "npm-audit-widget",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "name": "npm audit widget",
     "description": "Displays the number and severity of security issues in the build",
     "publisher": "BrandonBoone",
@@ -85,6 +85,13 @@
         "type": "git",
         "uri": "https://github.com/BrandonBoone/npm-audit-widget"
     },
+    "badges": [
+        {
+            "href": "https://travis-ci.org/BrandonBoone/npm-audit-widget",
+            "url": "https://api.travis-ci.org/BrandonBoone/npm-audit-widget.svg?branch=master",
+            "description": "TravisCI build for the project"
+        }
+    ],
     "content": {
         "details": {
             "path": "overview.md"

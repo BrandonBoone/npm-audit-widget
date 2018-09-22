@@ -1,5 +1,7 @@
 # ![logo](img/logo.png) npm-audit-widget
 
+[![Build Status](https://api.travis-ci.org/BrandonBoone/npm-audit-widget.svg?branch=master)](https://travis-ci.org/BrandonBoone/npm-audit-widget)
+
 Widget for Azure DevOps (TFS) Dashboard's for displaying npm audit results
 
 ## Build
