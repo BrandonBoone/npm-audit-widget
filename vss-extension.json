@@ -88,7 +88,7 @@
     "badges": [
         {
             "href": "https://travis-ci.org/BrandonBoone/npm-audit-widget",
-            "url": "https://api.travis-ci.org/BrandonBoone/npm-audit-widget.svg?branch=master",
+            "uri": "https://api.travis-ci.org/BrandonBoone/npm-audit-widget.svg?branch=master",
             "description": "TravisCI build for the project"
         }
     ],
