@@ -2,6 +2,8 @@
 
 npm audit widget is a Dashboard widget for Azure DevOps (TFS) Dashboard's that displays [npm audit](https://docs.npmjs.com/getting-started/running-a-security-audit) results.
 
+![widget example](img/example.png)
+
 ## [NPM Severities](https://docs.npmjs.com/getting-started/about-audit-reports#severity)
 
 - Critical:	Address immediately
