@@ -31,6 +31,7 @@ npm audit widget is a Dashboard widget for Azure DevOps (TFS) Dashboard's that d
     ![publish task](img/publishTask.png)
 
 1. Make sure the npm task comes before the publish task
+
     ![task groups](img/tasks.png)
 
 ## Credits
