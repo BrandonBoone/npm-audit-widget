@@ -15,6 +15,8 @@ npm audit widget is a Dashboard widget for Azure DevOps (TFS) Dashboard's that d
 
 *Note: You must be on npm v6.1.0 or greater*
 
+### Publishing npm audit results
+
 1. Create a [npm task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/package/npm?view=vsts) with the following arguments
     - working folder: `$/[path to application root (folder with package.json)]`
     - npm command: `audit`
@@ -33,6 +35,27 @@ npm audit widget is a Dashboard widget for Azure DevOps (TFS) Dashboard's that d
 1. Make sure the npm task comes before the publish task
 
     ![task groups](img/tasks.png)
+
+1. Save and Queue a build
+
+### Configuring the widget
+
+1. Install the widget from the market place
+1. Add the widget to the dashboard
+
+    ![task groups](img/configure.png)
+
+1. Configure the widget by choosing a build that is publishing `audit_results`
+1. The widget should display the total number of issues as well as the number of issues by type.
+
+    ![task groups](img/configured.png)
+
+    - `c`: critical
+    - `h`: high
+    - `m`: moderate
+    - `l`: low
+
+1. The color of the widget is determined by the severity.
 
 ## Credits
 
