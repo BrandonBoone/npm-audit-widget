@@ -16,6 +16,9 @@
     "scopes": [
         "vso.build"
     ],
+    "categories": [
+        "Plan and track"
+    ],
     "contributions": [
         {
             "id": "npmAuditWidget",
