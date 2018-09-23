@@ -1,4 +1,43 @@
-const _getData = ({ client, buildId, projectId, JSZip }) =>
+const _render = (severities, title) => {
+  const severityKeys = ['critical', 'high', 'moderate', 'low'];
+  let numOfIssues = 'N/A';
+  let footerText = 'no audit_results';
+  let backgroundColor = ''
+  let color = '#000000';
+
+  if (severities) {
+    numOfIssues = severityKeys.reduce((prev, next) => prev + (severities[next] || 0), 0);
+    footerText = severityKeys.reduce((prev, next) => `${prev ? `${prev}, `: prev } ${next.charAt(0)}: ${(severities[next] || 0)}`, '');
+    
+    if (severities['critical']) {
+      backgroundColor = '#DA0A00';
+      color = '#ffffff';
+    } else if (severities['high']) {
+      backgroundColor = '#FF6201';
+      color = '#ffffff';
+    } else if (severities['moderate']) {
+      backgroundColor = '#F08700';
+      color = '#ffffff';
+    } else if (severities['low']) {
+      backgroundColor = '#F8A800';
+      color = '#000';
+    } else {
+      backgroundColor = '#107C10';
+      color = '#ffffff'
+    }
+  }
+  return `
+<div id='widget' class='widget' style='${color ? `color:${color};`: ''}${backgroundColor ? `background-color:${backgroundColor};`: ''}'>
+  <h2 class="title">${title}</h2>
+  <div class="big-count truncated-text-ellipsis">${numOfIssues}</div>
+  <div class="footer truncated-text-ellipsis">${footerText}</div>
+  <div class="footer truncated-text-ellipsis">
+    <a style='${color ? `color:${color};`: ''}' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+  </div>
+</div>`;
+}
+
+const _getZipData = ({ client, buildId, projectId, JSZip }) =>
   client.getArtifactContentZip(buildId, 'audit_results', projectId)
   .then((zipArrayBuffer) => {
     if (!zipArrayBuffer) {
@@ -6,60 +45,13 @@ const _getData = ({ client, buildId, projectId, JSZip }) =>
     }
     return JSZip.loadAsync(zipArrayBuffer)
     .then((zip) => zip.file('audit_results/audit.json').async('string'))
-    .then((auditJson) => {
-      const auditData = JSON.parse(auditJson);
-      return auditData.metadata.vulnerabilities;
-
-      // return Object.keys(auditData.advisories)
-      //   .reduce((prev, key) => {
-      //     const advisory = auditData.advisories[key];
-          
-      //     prev[advisory.severity] = (prev[advisory.severity] || 0) + 1;
-
-      //     return prev;
-      //   }, {});
-    });
+    .then((auditJson) =>  JSON.parse(auditJson));
   });
-  
-
-const _paint = (severities, msg) => {
-  const severityKeys = ['critical', 'high', 'moderate', 'low'];
-  let numOfIssues = 'N/A';
-  let footerText = '';
-  let backgroundColor = ''
-
-  if (severities) {
-    numOfIssues = severityKeys.reduce((prev, next) => prev + (severities[next] || 0), 0);
-    footerText = severityKeys.reduce((prev, next) => `${prev ? `${prev}, `: prev } ${next.charAt(0)}: ${(severities[next] || 0)}`, '');
-    
-    if (severities['critical']) {
-      backgroundColor = '#da0a00';
-    } else if (severities['high']) {
-      backgroundColor = '#D88C00';
-    } else if (severities['moderate']) {
-      backgroundColor = '#CFD600';
-    } else if (severities['low']) {
-      backgroundColor = '#CFD600';
-    }
-  } else if (!msg) {
-    backgroundColor = '#107c10';
-  }
-  return `
-<div id='widget' class='widget' style='background-color:${backgroundColor};'>
-  <h2 class="title">npm Security Risks</h2>
-  <div class="big-count truncated-text-ellipsis">${numOfIssues}</div>
-  <div class="footer runcated-text-ellipsis">${footerText}</div>
-</div>`;
-}
 
 const _showWarnings = ({ callback, VSS, JSZip, WidgetHelpers, BuildRestClient, BuildContracts }) =>
   (widgetSettings) => {
     var customSettings = JSON.parse(widgetSettings.customSettings.data);
     if (!customSettings) {
-      customSettings = {
-        definitionId: null,
-        buildName: null
-      };
       return WidgetHelpers.WidgetStatusHelper.Success();
     }
 
@@ -69,8 +61,11 @@ const _showWarnings = ({ callback, VSS, JSZip, WidgetHelpers, BuildRestClient, B
     client.getBuilds(projectId, [customSettings.definitionId])
     .then((builds) => {
       if (builds.length > 0) {
-        return _getData({ client, buildId: builds[0].id, projectId, JSZip })
-        .then((severities) => callback(_paint(severities)));
+        return _getZipData({ client, buildId: builds[0].id, projectId, JSZip })
+        .then((auditData) => callback(
+          _render(auditData && auditData.metadata && auditData.metadata.vulnerabilities, customSettings.buildName),
+          auditData
+        ));
       }
     }); //todo: error handling
     return WidgetHelpers.WidgetStatusHelper.Success();

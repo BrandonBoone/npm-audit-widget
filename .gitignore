@@ -1,3 +1,8 @@
+# Output
+*.vsix
+dist/
+lib/
+
 # Logs
 logs
 *.log
@@ -50,9 +55,6 @@ typings/
 
 # Output of 'npm pack'
 *.tgz
-
-# Output of 'tfx-cli'
-*.vsix
 
 # Yarn Integrity file
 .yarn-integrity

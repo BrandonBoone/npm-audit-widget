@@ -43,6 +43,7 @@ export default function({ zipFile }) {
       customSettings: {
         data: JSON.stringify({
           definitionId: 5655,
+          buildName: 'TRUNK',
         })
       }
     });
