@@ -1,6 +1,7 @@
 # ![logo](img/logo.png) npm-audit-widget
 
-[![Build Status](https://api.travis-ci.org/BrandonBoone/npm-audit-widget.svg?branch=master)](https://travis-ci.org/BrandonBoone/npm-audit-widget)
+[![Build Status](https://api.travis-ci.org/BrandonBoone/npm-audit-widget.svg?branch=master)](https://travis-ci.org/BrandonBoone/npm-audit-widget) 
+[![Greenkeeper badge](https://badges.greenkeeper.io/BrandonBoone/npm-audit-widget.svg)](https://greenkeeper.io/)
 [![Dependency Status](https://david-dm.org/BrandonBoone/npm-audit-widget.svg)](https://david-dm.org/BrandonBoone/npm-audit-widget)
 [![devDependency Status](https://david-dm.org/BrandonBoone/npm-audit-widget/dev-status.svg)](https://david-dm.org/BrandonBoone/npm-audit-widget#info=devDependencies)
 
