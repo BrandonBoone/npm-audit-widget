@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "npm-audit-widget",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "name": "npm audit widget",
     "description": "Displays the number and severity of security issues in the build",
     "publisher": "BrandonBoone",
