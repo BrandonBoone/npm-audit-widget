@@ -8,6 +8,10 @@
 
 Widget for Azure DevOps (TFS) Dashboard's for displaying npm audit results
 
+## Install
+
+https://marketplace.visualstudio.com/items?itemName=BrandonBoone.npm-audit-widget
+
 ## Build
 
 1. Install [tfx-cli](https://github.com/Microsoft/tfs-cli): `npm i -g tfx-cli`
