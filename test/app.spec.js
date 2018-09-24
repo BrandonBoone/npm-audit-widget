@@ -13,12 +13,12 @@ describe('app', () => {
         expect(data).toEqual(null);
         expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#000000;'>
+<div id="widget" class="widget" style="color:#000000;">
   <h2 class="title">TRUNK</h2>
   <div class="big-count truncated-text-ellipsis">N/A</div>
   <div class="footer truncated-text-ellipsis">no audit_results</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#000000;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#000000;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
         );
@@ -35,12 +35,12 @@ describe('app', () => {
       app(VSS, JSZip, (renderedApp) => {
         expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#ffffff;background-color:#F08700;'>
+<div id="widget" class="widget" style="color:#ffffff;background-color:#F08700;">
   <h2 class="title">TRUNK</h2>
   <div class="big-count truncated-text-ellipsis">10</div>
   <div class="footer truncated-text-ellipsis"> c: 0,  h: 0,  m: 10,  l: 0</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#ffffff;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#ffffff;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
         );
@@ -57,12 +57,12 @@ describe('app', () => {
       app(VSS, JSZip, (renderedApp) => {
         expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#ffffff;background-color:#DA0A00;'>
+<div id="widget" class="widget" style="color:#ffffff;background-color:#DA0A00;">
   <h2 class="title">TRUNK</h2>
   <div class="big-count truncated-text-ellipsis">15</div>
   <div class="footer truncated-text-ellipsis"> c: 1,  h: 4,  m: 10,  l: 0</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#ffffff;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#ffffff;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
         );
@@ -79,12 +79,12 @@ describe('app', () => {
       app(VSS, JSZip, (renderedApp) => {
         expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#ffffff;background-color:#FF6201;'>
+<div id="widget" class="widget" style="color:#ffffff;background-color:#FF6201;">
   <h2 class="title">TRUNK</h2>
   <div class="big-count truncated-text-ellipsis">11</div>
   <div class="footer truncated-text-ellipsis"> c: 0,  h: 1,  m: 10,  l: 0</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#ffffff;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#ffffff;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
         );
@@ -101,12 +101,12 @@ describe('app', () => {
       app(VSS, JSZip, (renderedApp) => {
         expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#000;background-color:#F8A800;'>
+<div id="widget" class="widget" style="color:#000;background-color:#F8A800;">
   <h2 class="title">TRUNK</h2>
   <div class="big-count truncated-text-ellipsis">1</div>
   <div class="footer truncated-text-ellipsis"> c: 0,  h: 0,  m: 0,  l: 1</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#000;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#000;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
         );
@@ -123,12 +123,12 @@ describe('app', () => {
       app(VSS, JSZip, (renderedApp) => {
         expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#ffffff;background-color:#107C10;'>
+<div id="widget" class="widget" style="color:#ffffff;background-color:#107C10;">
   <h2 class="title">TRUNK</h2>
   <div class="big-count truncated-text-ellipsis">0</div>
   <div class="footer truncated-text-ellipsis"> c: 0,  h: 0,  m: 0,  l: 0</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#ffffff;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#ffffff;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
         );
@@ -145,12 +145,12 @@ describe('app', () => {
       app(VSS, JSZip, (renderedApp) => {
         expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#000000;'>
+<div id="widget" class="widget" style="color:#000000;">
   <h2 class="title">null</h2>
   <div class="big-count truncated-text-ellipsis\">N/A</div>
   <div class="footer truncated-text-ellipsis">no audit_results</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#000000;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#000000;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
         );
@@ -189,12 +189,12 @@ describe('app', () => {
         if (called === 1) {
           expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#ffffff;background-color:#107C10;'>
+<div id="widget" class="widget" style="color:#ffffff;background-color:#107C10;">
   <h2 class="title">TRUNK</h2>
   <div class="big-count truncated-text-ellipsis">0</div>
   <div class="footer truncated-text-ellipsis"> c: 0,  h: 0,  m: 0,  l: 0</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#ffffff;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#ffffff;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
           );
@@ -202,12 +202,12 @@ describe('app', () => {
         } else if (called === 2) {
           expect(renderedApp).toEqual(
 `
-<div id='widget' class='widget' style='color:#ffffff;background-color:#107C10;'>
+<div id="widget" class="widget" style="color:#ffffff;background-color:#107C10;">
   <h2 class="title">TRUNK2</h2>
   <div class="big-count truncated-text-ellipsis">0</div>
   <div class="footer truncated-text-ellipsis"> c: 0,  h: 0,  m: 0,  l: 0</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='color:#ffffff;' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:#ffffff;" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`
           );

@@ -38,26 +38,20 @@ export default function({ zipFile, noBuilds, noSettings }) {
     });
     callback(...resolvedModules);
   };
+  this.getSettings = (buildName) => ({
+    customSettings: {
+      data: !noSettings ? JSON.stringify({
+        definitionId: 5655,
+        buildName,
+      }) : null
+    }
+  });
   this.notifyLoadSucceeded = () => {
-    this._app.load({
-      customSettings: {
-        data: !noSettings ? JSON.stringify({
-          definitionId: 5655,
-          buildName: 'TRUNK',
-        }) : null
-      }
-    });
+    this._app.load(this.getSettings('TRUNK'));
   };
 
   this.reload = () => {
-    this._app.reload({
-      customSettings: {
-        data: !noSettings ? JSON.stringify({
-          definitionId: 5655,
-          buildName: 'TRUNK2',
-        }) : null
-      }
-    });
+    this._app.reload(this.getSettings('TRUNK2'));
   };
 
   this.getWebContext = () => ({

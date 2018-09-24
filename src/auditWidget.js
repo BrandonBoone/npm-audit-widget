@@ -27,12 +27,12 @@ const _render = (severities, title) => {
     }
   }
   return `
-<div id='widget' class='widget' style='${color ? `color:${color};`: ''}${backgroundColor ? `background-color:${backgroundColor};`: ''}'>
+<div id="widget" class="widget" style="color:${color};${backgroundColor ? `background-color:${backgroundColor};`: ''}">
   <h2 class="title">${title}</h2>
   <div class="big-count truncated-text-ellipsis">${numOfIssues}</div>
   <div class="footer truncated-text-ellipsis">${footerText}</div>
   <div class="footer truncated-text-ellipsis">
-    <a style='${color ? `color:${color};`: ''}' href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
+    <a style="color:${color};" href="https://docs.npmjs.com/getting-started/running-a-security-audit">npm audit</a> results
   </div>
 </div>`;
 }
