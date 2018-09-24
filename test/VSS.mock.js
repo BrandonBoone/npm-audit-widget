@@ -8,7 +8,7 @@ function mockWidgetHelpers () {
   };
 }
 
-function mockBuildClient (zipFile) {
+function mockBuildClient (zipFile, noBuilds) {
   this.getClient = () => {
     let bufferedZip = null;
     if (zipFile)
@@ -18,12 +18,12 @@ function mockBuildClient (zipFile) {
     }
     return {
       getArtifactContentZip: () => Promise.resolve(bufferedZip),
-      getBuilds: () => Promise.resolve([{id: 5655}]),
+      getBuilds: () => Promise.resolve(!noBuilds ? [{id: 5655}] : null),
     };
   }
 }
 
-export default function({ zipFile }) {
+export default function({ zipFile, noBuilds, noSettings }) {
   this._app = null;
   this.init = () => { };
   this.register = (name, callback) => { this._app = callback(); }
@@ -33,7 +33,7 @@ export default function({ zipFile }) {
         case 'TFS/Dashboards/WidgetHelpers':
           return new mockWidgetHelpers();
         case 'TFS/Build/RestClient': 
-          return new mockBuildClient(zipFile);
+          return new mockBuildClient(zipFile, noBuilds);
       }
     });
     callback(...resolvedModules);
@@ -41,13 +41,25 @@ export default function({ zipFile }) {
   this.notifyLoadSucceeded = () => {
     this._app.load({
       customSettings: {
-        data: JSON.stringify({
+        data: !noSettings ? JSON.stringify({
           definitionId: 5655,
           buildName: 'TRUNK',
-        })
+        }) : null
       }
     });
   };
+
+  this.reload = () => {
+    this._app.reload({
+      customSettings: {
+        data: !noSettings ? JSON.stringify({
+          definitionId: 5655,
+          buildName: 'TRUNK2',
+        }) : null
+      }
+    });
+  };
+
   this.getWebContext = () => ({
     project: {
       id: '31582f6f-c133-44ed-8113-3b4a3eecae9d'

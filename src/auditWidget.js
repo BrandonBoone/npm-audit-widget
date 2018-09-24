@@ -37,6 +37,13 @@ const _render = (severities, title) => {
 </div>`;
 }
 
+const _renderNotConfigured = () =>
+  `<div id="widget" class="widget">
+    <h2 class="title">npm audit widget</h2>
+    <div class="big-count truncated-text-ellipsis">N/A</div>
+    <div class="footer truncated-text-ellipsis">not configured</div>
+  </div>`;
+
 const _getZipData = ({ client, buildId, projectId, JSZip }) =>
   client.getArtifactContentZip(buildId, 'audit_results', projectId)
   .then((zipArrayBuffer) => {
@@ -52,6 +59,7 @@ const _showWarnings = ({ callback, VSS, JSZip, WidgetHelpers, BuildRestClient, B
   (widgetSettings) => {
     var customSettings = JSON.parse(widgetSettings.customSettings.data);
     if (!customSettings) {
+      callback(_renderNotConfigured())
       return WidgetHelpers.WidgetStatusHelper.Success();
     }
 
@@ -60,12 +68,17 @@ const _showWarnings = ({ callback, VSS, JSZip, WidgetHelpers, BuildRestClient, B
 
     client.getBuilds(projectId, [customSettings.definitionId])
     .then((builds) => {
-      if (builds.length > 0) {
+      if (builds && builds.length > 0) {
         return _getZipData({ client, buildId: builds[0].id, projectId, JSZip })
         .then((auditData) => callback(
           _render(auditData && auditData.metadata && auditData.metadata.vulnerabilities, customSettings.buildName),
           auditData
         ));
+      } else {
+        callback(
+          _render(null, null),
+          null
+        )
       }
     }); //todo: error handling
     return WidgetHelpers.WidgetStatusHelper.Success();

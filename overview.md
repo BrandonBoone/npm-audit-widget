@@ -57,6 +57,8 @@ npm audit widget is a Dashboard widget for Azure DevOps (TFS) Dashboard's that d
 
 1. The color of the widget is determined by the severity.
 
+    ![task groups](img/colors.png)
+
 ## Credits
 
 - Logo: [virus by Ilsur Aptukov from the Noun Project](https://thenounproject.com/term/virus/209072/)
