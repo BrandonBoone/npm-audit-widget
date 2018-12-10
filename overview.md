@@ -15,7 +15,43 @@ npm audit widget is a Dashboard widget for Azure DevOps (TFS) Dashboard's that d
 
 *Note: You must be on npm v6.1.0 or greater*
 
-### Publishing npm audit results
+### Publishing npm audit results on Azure DevOps
+
+See: [Azure DevOps Example](https://dev.azure.com/npmAuditWidget/_git/npmAuditWidget?path=%2Fazure-pipelines.yml&version=GBmaster)
+
+```yaml
+jobs:
+- job: Windows
+
+  pool:
+    vmImage: 'vs2017-win2016'
+
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '8.x'
+    displayName: 'Install Node.js'
+
+  - script: npm i npm -g
+    displayName: 'update npm'
+
+  - script: npm -v
+    displayName: 'check version'
+
+  - script: npm install
+    displayName: 'npm install'
+
+  - script: npm audit --json > audit.json
+    displayName: 'audit'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: audit_results'
+    inputs:
+      PathtoPublish: 'audit.json'
+      ArtifactName: 'audit_results'
+```
+
+### Publishing npm audit results on TFS (2017)
 
 1. Create a [npm task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/package/npm?view=vsts) with the following arguments
     - working folder: `$/[path to application root (folder with package.json)]`
