@@ -35,7 +35,7 @@
     "babel-jest": "^23.4.2",
     "@babel/plugin-external-helpers": "^7.2.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.0.0",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
