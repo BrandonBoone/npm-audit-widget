@@ -48,7 +48,7 @@
     "rollup-plugin-node-resolve": "^5.0.0",
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-terser": "^5.0.0",
-    "rollup-plugin-commonjs": "^9.1.6"
+    "rollup-plugin-commonjs": "^10.0.1"
   },
   "keywords": [],
   "repository": "https://github.com/BrandonBoone/npm-audit-widget",
